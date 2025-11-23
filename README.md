@@ -1,10 +1,10 @@
 # Evan Amaya - Portafolio Personal
 
-Hola! Soy **Evan Amaya**, un desarrollador web apasionado desde Colombia, Bogota. Este es mi portafolio personal donde muestro mis proyectos, habilidades y un poco sobre quien soy.
+Hola! Soy **Evan Amaya**, un desarrollador web iniciando mi carrera desde Colombia, Bogota. Este es mi portafolio personal donde muestro mis proyectos, habilidades y un poco sobre quien soy.
 
 ## Sobre Mi
 
-Soy un desarrollador web que disfruta resolver problemas de manera creativa. Me encanta enfrentar desafios tanto cognitivos como matematicos, y transformar ideas en soluciones web funcionales y atractivas.
+Soy un desarrollador web que disfruta resolver problemas de manera creativa. Me encanta enfrentar desafios tanto cognitivos como matematicos, y usar mis habilades para poder crear soluciones web efectivas y complejas para la industria
 
 Actualmente me encuentro en constante aprendizaje, explorando nuevas tecnologias y mejorando mis habilidades cada dia.
 
@@ -47,29 +47,6 @@ Mi-Portafolio-Devan/
 - **Codigo Organizado**: Archivos separados para mejor mantenimiento
 - **Accesibilidad**: Pensado para todos los usuarios
 
-## Como Usar
-
-1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/DeVEvan-Amaya/Mi-Portafolio-Devan.git
-   ```
-
-2. Abre `index.html` en tu navegador o usa un servidor local
-
-3. Para personalizar:
-   - Edita `css/styles.css` para cambiar estilos
-   - Modifica `js/main.js` para ajustar funcionalidades
-   - Actualiza las imagenes en la carpeta `images/`
-
-## Imagenes Requeridas
-
-Para que el portafolio funcione correctamente, necesitas agregar estas imagenes en la carpeta `images/`:
-
-| Archivo | Descripcion |
-|---------|-------------|
-| `logo-dan.png` | Logo personal (preferiblemente con fondo transparente) |
-| `foto-personal.jpg` | Tu foto de perfil |
-
 ## Contacto
 
 Si quieres colaborar o tienes alguna pregunta, no dudes en contactarme:
@@ -86,8 +63,7 @@ Actualmente estoy disponible para:
 - Colaboraciones
 - Trabajo Remoto
 
-Tiempo de respuesta: **24 horas**
+Tiempo de respuesta: **24 horas o menos**
 
----
 
-Desarrollado con pasion por **Evan Amaya** desde Colombia
+Desarrollado con pasion y mucho esfuerzo cognitivo y dedicacion por **Evan Amaya** desde Colombia
