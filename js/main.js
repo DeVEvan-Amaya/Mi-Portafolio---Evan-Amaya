@@ -327,40 +327,11 @@ function animateCounter(element, target, duration = 2000) {
     requestAnimationFrame(update);
 }
 
-// Observer para stats
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const statValue = entry.target.querySelector('.stat-value');
-            if (statValue) {
-                const text = statValue.textContent;
-                const number = parseInt(text.replace(/\D/g, ''));
-                const prefix = text.match(/^\D+/) || [''];
-                const suffix = text.match(/\D+$/) || [''];
-
-                if (!isNaN(number) && number > 0) {
-                    animateCounter({
-                        textContent: '',
-                        set textContent(val) {
-                            statValue.textContent = prefix[0] + val + suffix[0];
-                        }
-                    }, number, 1500);
-                }
-            }
-            statsObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.stat-item').forEach(stat => {
-    statsObserver.observe(stat);
-});
-
 // ====================================================================
 // MAGNETIC BUTTONS EFFECT
 // ====================================================================
 
-const magneticButtons = document.querySelectorAll('.btn-gradient, .social-btn');
+const magneticButtons = document.querySelectorAll('.btn-gradient');
 
 magneticButtons.forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
@@ -705,112 +676,3 @@ class ParticleSystem {
 // Inicializar sistema de particulas
 const particleSystem = new ParticleSystem();
 
-// ====================================================================
-// MANEJO DEL FORMULARIO DE CONTACTO
-// ====================================================================
-
-const contactForm = document.getElementById('contactForm');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const submitBtn = contactForm.querySelector('.form-submit');
-        const originalText = submitBtn.innerHTML;
-
-        // Estado de carga
-        submitBtn.innerHTML = `
-            <span>Enviando...</span>
-            <svg class="spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                <circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="32"/>
-            </svg>
-        `;
-        submitBtn.disabled = true;
-
-        try {
-            const formData = new FormData(contactForm);
-            const response = await fetch(contactForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                // Exito - Guardar el HTML original del formulario para poder restaurarlo
-                const formSection = document.querySelector('.contact-form-section');
-                const originalFormHTML = formSection.innerHTML;
-
-                formSection.innerHTML = `
-                    <div class="form-success">
-                        <div class="success-icon-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
-                        </div>
-                        <h4>Solicitud recibida correctamente</h4>
-                        <p>Tu mensaje ha sido enviado con exito. Me pondre en contacto contigo a la brevedad posible a traves del correo electronico proporcionado.</p>
-                        <div class="success-info">
-                            <span class="success-badge">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <polyline points="12 6 12 12 16 14"/>
-                                </svg>
-                                Tiempo de respuesta: 24-48 horas
-                            </span>
-                        </div>
-                        <button type="button" class="btn btn-outline new-message-btn">
-                            <span>Enviar otro mensaje</span>
-                        </button>
-                    </div>
-                `;
-
-                // Listener para el boton de nuevo mensaje
-                const newMsgBtn = formSection.querySelector('.new-message-btn');
-                if (newMsgBtn) {
-                    newMsgBtn.addEventListener('click', () => {
-                        location.reload();
-                    });
-                }
-            } else {
-                throw new Error('Error en el envio');
-            }
-        } catch (error) {
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            // Mostrar error de forma más elegante
-            const formSection = document.querySelector('.contact-form-section');
-            const existingError = formSection.querySelector('.form-error-message');
-            if (existingError) existingError.remove();
-
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'form-error-message';
-            errorDiv.innerHTML = `
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="15" y1="9" x2="9" y2="15"/>
-                    <line x1="9" y1="9" x2="15" y2="15"/>
-                </svg>
-                <span>No se pudo enviar el mensaje. Verifica tu conexion e intenta nuevamente.</span>
-            `;
-            formSection.insertBefore(errorDiv, formSection.querySelector('.contact-form'));
-
-            // Remover mensaje de error despues de 5 segundos
-            setTimeout(() => errorDiv.remove(), 5000);
-        }
-    });
-}
-
-// CSS para animacion de carga
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-    .spin {
-        animation: spin 1s linear infinite;
-    }
-`;
-document.head.appendChild(style);
